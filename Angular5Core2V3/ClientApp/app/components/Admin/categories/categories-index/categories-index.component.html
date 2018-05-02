@@ -1,0 +1,112 @@
+﻿<div>
+    <div class="btnMargin">
+        <button pButton type="button" label="Add New Category" (click)="addCategory()" style="width:200px;height:40px"></button>
+    </div>
+
+    <div>
+        <p-dataView #dv [value]="categories" [paginator]="true" [rows]="20" paginatorPosition="both"
+                    [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <div class="ui-g">
+                        <div class="ui-g-6 ui-md-4 filter-container" style="text-align:left">
+                            <div>
+                                <input type="search" pInputText placeholder="Search by name" (keyup)="filter($event.target.value)" style="width:300px">
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4" style="text-align:center">
+                            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [autoWidth]="false" [style]="{'min-width':'15em'}"></p-dropdown>
+                        </div>
+                        <div class="ui-g-6 ui-md-4" style="text-align:right">
+                            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                        </div>
+                    </div>
+                </div>
+            </p-header>
+            <p-footer>
+                <div class="ui-helper-clearfix">
+                    <div class="ui-g">
+                        <div class="ui-g-6 ui-md-4 filter-container" style="text-align:left">
+                            <div>
+                                <input type="search" pInputText placeholder="Search by name" (keyup)="filter($event.target.value)" style="width:300px">
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4" style="text-align:center">
+                            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [autoWidth]="false" [style]="{'min-width':'15em'}"></p-dropdown>
+                        </div>
+                        <div class="ui-g-6 ui-md-4" style="text-align:right">
+                            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                        </div>
+                    </div>
+                </div>
+            </p-footer>
+            <ng-template let-category pTemplate="listItem">
+                <div class="row" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                    <div class="col-xs-1 col-md-1 vcenter">
+                        <button pButton type="button" icon="fa fa-fw fa-close" (click)="deleteCategory(category)" class="ui-button-danger"></button>
+                    </div>
+                    <div class="col-xs-3 col-md-2 vcenter">
+                        <img [src]="getImage(category)" width="120" />
+                    </div>
+                    <div class="col-xs-3 col-md-3 vcenter">
+                        <div><h4><b><a (click)="viewCategory(category)" style="cursor:pointer">{{getCategoryName(category)}}</a></b></h4></div>
+                        <div *ngIf="category.Parent != null;then parentName else parentPlaceholder"></div>
+                        <ng-template class="ui-g-10 ui-sm-6" #parentName><h5>{{ getParentName(category) }}</h5></ng-template>
+                        <ng-template class="ui-g-10 ui-sm-6" #parentPlaceholder><i>No Parent</i></ng-template>
+                    </div>
+                    <div class="col-xs-5 col-md-5 vcenter" style="text-align:right">
+                        <button pButton type="button" label="Edit" (click)="editCategory(category)" style="width:150px;height:40px"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template let-category pTemplate="gridItem">
+                <div class="ui-g-12 ui-md-3" style="text-align:center; margin-top:5px;margin-bottom:5px;">
+                    <div>
+                        <img src="{{ getImage(category) }}" width="200">
+                    </div>
+                    <div>
+                        <div>
+                            <h4><b><a style="cursor:pointer" (click)="viewCategory(category)">{{getCategoryName(category)}}</a></b></h4>
+                            <div *ngIf="category!.Parent != null;then parentName else parentPlaceholder"></div>
+                            <ng-template class="ui-g-10 ui-sm-6" #parentName><h5>{{ getParentName(category) }}</h5></ng-template>
+                            <ng-template class="ui-g-10 ui-sm-6" #parentPlaceholder><i>No Parent</i></ng-template>
+                        </div>
+                    </div>
+                    <div>
+                        <button pButton type="button" icon="fa fa-fw fa-close" (click)="deleteCategory(category)" class="ui-button-danger" style="width:40px; height:40px"></button>
+                        <button pButton type="button" label="Edit" (click)="editCategory(category)" style="width:160px;height:40px"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+        </p-dataView>
+    </div>
+
+    <div class="btnMargin">
+        <button pButton type="button" label="Add New Category" (click)="addCategory()" style="width:200px;height:40px"></button>
+    </div>
+
+</div>
+
+<!--<p-dialog header="Category Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="225" (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedCategory">
+        <div class="ui-g-12" style="text-align:center" *ngFor="let image in selectedCategory.Images">
+            <img src="{{image.Path1}}">
+            <img src="{{image.Path2}}">
+            <img src="{{image.Path3}}">
+        </div>
+
+        <div class="ui-g-4">Name: </div>
+        <div class="ui-g-8">{{selectedCategory.Name}}</div>
+
+        <div class="ui-g-4">Description1 </div>
+        <div class="ui-g-8">{{getDescription1($event, selectedCategory)}}</div>
+
+        <div class="ui-g-4">Description2 </div>
+        <div class="ui-g-8">{{getDescription2($event, selectedCategory)}}</div>
+
+        <div class="ui-g-4">Description3 </div>
+        <div class="ui-g-8">{{getDescription3($event, selectedCategory)}}</div>
+    </div>
+</p-dialog>-->

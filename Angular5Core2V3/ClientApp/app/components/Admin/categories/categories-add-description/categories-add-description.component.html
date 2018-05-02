@@ -1,0 +1,67 @@
+﻿<div class="container">
+    <div class="row">
+        <p-card [style]="{width: '500px'}" styleClass="ui-card-shadow">
+            <p-header>
+                <div style="text-align:center">
+                    <h4><b>Description</b></h4>
+                    <p-button label="Delete" (onClick)="DeleteLanguage($event, selectedLanguage)" [hidden]="hideDeleteButton()"></p-button>
+                </div>
+            </p-header>
+            <div class="row">
+                <div class="col-md-3">
+                    Language
+                </div>
+                <div class="col-md-8">
+                    <p-autoComplete [(ngModel)]="selectedLanguage" [suggestions]="filteredLanguages" (completeMethod)="filterLanguages($event)" [size]="30"
+                                    [minLength]="1" placeholder="Language Name" field="Name" [dropdown]="true" (onSelect)="setLanguage($event)" [forceSelection]="true">
+                        <ng-template let-selectedLanguage pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <div style="font-size:18px;float:none;margin:10px 10px 0 0">
+                                    {{ selectedLanguage!.Name }}
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    Name
+                </div>
+                <div class="col-md-8">
+                    <span class="ui-float-label">
+                        <input id="categoryName" type="text" size="36" pInputText (change)="getName($event, Language)">
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    Description 1
+                </div>
+                <div class="col-md-8">
+                    <textarea pInputTextarea [cols]="37" [rows]="6" type="text" (change)="getDescription1($event, Language)"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    Description 2
+                </div>
+                <div class="col-md-8">
+                    <textarea pInputTextarea [cols]="37" [rows]="6" type="text" (change)="getDescription2($event, Language)"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    Description 3
+                </div>
+                <div class="col-md-8">
+                    <textarea pInputTextarea [cols]="37" [rows]="6" type="text" (change)="getDescription3($event, Language)"></textarea>
+                </div>
+            </div>
+
+        </p-card>
+    </div>
+</div>

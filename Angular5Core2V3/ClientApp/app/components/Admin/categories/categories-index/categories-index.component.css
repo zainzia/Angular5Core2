@@ -1,0 +1,28 @@
+﻿.btnMargin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align:right;
+}
+
+.actionMargin {
+    margin-right:30px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+a:active {
+    color:#C0392B;
+}
+
+a:visited {
+    color:#BB8FCE;
+}
+
+a:link {
+    color:#2980B9;
+}
+
